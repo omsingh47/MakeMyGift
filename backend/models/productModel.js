@@ -6,14 +6,12 @@ var productSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    slug:{
+    product_id:{
         type:String,
-        unique: true,
         lowercase:true
     },
     shop_tag:{
         type:String,
-        unique:true, 
         required:true
     },
     description:{
@@ -35,14 +33,6 @@ var productSchema = new mongoose.Schema({
     images:{
         type: Array,
     },
-    color:{
-        type: String,
-        enum: ["Black, Brown", "Red"],
-    },
-    ratings: [{
-        star: Number,
-        postedby: {type: mongoose.Schema.Types.ObjectId, ref:"User"},
-    }],
     sold: {
         type:Number,
         default:0,

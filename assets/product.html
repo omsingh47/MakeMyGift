@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Test</title>
+</head>
+
+
+  <!-- bootstrap cdn -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <style type="text/css">
+    footer,header{   background :rgb(251,153,2,0.5); padding: 1rem;}
+    footer{padding: 2rem;}
+    .footer-copyright{margin-left: 1rem;}
+  	
+  </style>
+
+  <style type="text/css">
+
+    /*file input */
+    .file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 500px;
+  height: 50px;
+  border-radius: 15px;
+  border: solid 0.8px;
+  border-color: rgb(251,153,2,0.8);
+  padding: 1rem;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.9rem;
+
+}
+
+
+  </style>
+
+  <style type="text/css">
+    textarea{border-radius: 0.5rem;border-color: rgb(251,153,2,0.5);padding: 0.5rem;margin-left: 1rem;margin-bottom: 1rem;}
+      /* color rgb(251,153,2);*/
+      .card{
+        border: none;
+        overflow: hidden;
+        padding: 0.8rem;
+        border: 1px solid #eee;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 2rem;
+      }
+
+      /**/
+      .thumbnail_images ul{
+        list-style: none;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        margin-top:10px
+      }
+      .thumbnail_images ul li{
+        margin: 5px;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .thumbnail_images ul li:hover
+      {border: 2px solid rgb(251,153,2,0.5);}
+
+      .main_image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 400px;
+        width: 100%;
+        overflow: hidden
+      }
+
+      /*dont change*/
+      .heart{
+        height: 30px;width: 30px;
+        background-color: #eaeaea;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;align-items: center;
+      }
+      .content p{font-size: 12px}     
+      .btn{
+        height: 50px;
+        width: 450px;
+        border-radius: 0px !important;
+      }
+
+      /*mine*/
+      .btn-buy {
+        background-color: rgb(251,153,2);
+      }
+      .btn-add{
+        border-color: rgb(251,153,2);
+      }
+      .btn:hover {
+          color: rgb(251,153,2);
+          background-color: #fff;
+          border-color: rgb(251,153,2);
+          box-shadow: none
+      }
+
+      .input-group{
+        padding: 1%;
+        margin: 2%;
+        margin-top: 1.5rem;
+      }
+
+      .input-group-text{
+        border: none;
+          color: #000;
+          background-color: rgb(251,153,2,0.5);
+          width: 120px;
+          border-radius: 20px;
+
+
+      }
+
+      .form-select,.form-control{
+        border-color: rgb(251,153,2,0.5);
+        border-radius: 20px;
+      }
+
+
+      li>img{width: 100px;}
+      #main_product_image{width: 400px;}
+      #right{padding: 1.5rem;padding-top: 2rem;padding-left: 2.5rem;}
+      
+
+.container-image-wishlist{display: flex;}
+.main_image{flex: 1;}
+.wishlist{padding-top: 5rem;}
+#thumbnail{padding: 0;}
+h3{font-weight: bold;}
+      @media screen and (max-width: 600px) {
+        #right{padding: 1rem;}
+    }
+
+
+.file-input{margin-left: 20px;}
+
+.input-group{width: 50%;}
+    </style>
+
+
+<body>
+
+<header>
+  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="150" height="30" role="img" aria-label="Bootstrap"><img src="./assets/images/logo.svg"></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+
+        <div class="text-end">
+          <!-- icons -->
+	        <ul class="icons nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+	          <li><a href="#" class="nav-link px-2 link-secondary"><img src="./assets/images/heart.svg" alt="" /></a></li>
+	          <li><a href="#" class="nav-link px-2 link-body-emphasis"><img src="./assets/images/bell.svg" alt=""></a></li>
+	          <li><a href="#" class="nav-link px-2 link-body-emphasis"><img src="./assets/images/bag.svg"></a></li>
+	          <li><a href="#" class="nav-link px-2 link-body-emphasis"><img src="./assets/images/person-circle.svg"></a></li>
+	        </ul>
+	        <!-- icons end -->
+        </div>
+      </div>
+</header>
+
+
+<div class="container mt-5 mb-5"> 
+  <div class="card">  
+    <div class="row g-0"> 
+    <!--left side-->
+    <div class="col-lg-6" id="left">  
+      <div class="d-flex flex-column justify-content-center"> 
+
+        <div class="container-image-wishlist">
+          <div class="main_image">  
+            <img src="https://i.imgur.com/TAzli1U.jpg" id="main_product_image">   
+          </div>  
+          <div class="wishlist">
+          <!--wishlist -->
+            <span class="heart"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></span>
+          </div>
+          
+        </div>
+        
+        <div class="thumbnail_images">  
+          <ul id="thumbnail"> 
+            <li><img onclick="changeImage(this)" src="https://i.imgur.com/TAzli1U.jpg"></li>  
+            <li><img onclick="changeImage(this)" src="https://i.imgur.com/w6kEctd.jpg"></li>  
+            <li><img onclick="changeImage(this)" src="https://i.imgur.com/L7hFD8X.jpg"></li>  
+            <li><img onclick="changeImage(this)" src="https://i.imgur.com/6ZufmNS.jpg"></li>  
+          </ul> 
+        </div>
+
+      </div>  
+    </div>  
+    <!--right side-->
+    <div class="col-lg-6" id="right"> 
+      <div class="p-3 right-side">  
+        <div class="d-flex justify-content-between align-items-center"> 
+          <h3>IIlana</h3> 
+        </div>  
+        <div class="mt-2 pr-3 content"> 
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim neque volutpat ac tincidunt vitae semper quis. Et odio pellentesque diam volutpat commodo. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Blandit cursus risus at ultrices mi tempus imperdiet. Leo integer malesuada nunc vel risus.</p> 
+        </div>  
+        <h3>$430.99</h3>  
+        </div>
+        
+
+        
+
+
+
+        <!--comment box-->
+        <textarea rows="4" cols="65">Let the artist know your specific customizations.</textarea>
+
+        
+
+          <!--file input -->
+
+          <div class="file-input">
+            <input type="file" id="file" class="file">
+            <label for="file">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16"><path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/></svg>
+              Upload reference image
+              <p class="file-name"></p>
+            </label>
+        </div>
+
+
+
+
+
+        
+
+        <div class="buttons d-flex flex-row mt-5 gap-3">
+          <button class="btn btn-buy">Buy Now</button> 
+              <button class="btn btn-add">Add to cart</button> 
+            </div>
+
+
+
+      </div>  
+    </div>  
+  </div>  
+</div> 
+</div>
+
+
+
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+     <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"><svg class="bi me-2" width="80" height="30" role="img" aria-label="Bootstrap"><img src="./assets/images/logo.svg"></svg></a>
+
+      <span class="footer-copyright mb-3 mb-md-0 text-body-secondary">© 2023 MakeMyGift, Inc</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body" href="#"><svg class="bi" width="24" height="24"><img src="./assets/images/twitter-x.svg"></svg></a></li>
+      <li class="ms-3"><a class="text-body" href="#"><svg class="bi" width="24" height="24"><img src="./assets/images/instagram.svg"></svg></a></li>
+      <li class="ms-3"><a class="text-body" href="#"><svg class="bi" width="24" height="24"><img src="./assets/images/facebook.svg"></svg></a></li>
+    </ul>
+</footer>
+	
+
+<!-- bootstrap js cdn -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<!--file input -->
+<script type="text/javascript">
+const file = document.querySelector('#file');
+file.addEventListener('change', (e) => {
+  // Get the selected file
+  const [file] = e.target.files;
+  // Get the file name and size
+  const { name: fileName, size } = file;
+  // Convert size in bytes to kilo bytes
+  const fileSize = (size / 1000).toFixed(2);
+  // Set the text content
+  const fileNameAndSize = `${fileName} - ${fileSize}KB`;
+  document.querySelector('.file-name').textContent = fileNameAndSize;
+});
+</script>
+
+</body>
+</html>

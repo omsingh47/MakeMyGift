@@ -1,0 +1,55 @@
+footer,
+header {
+    background: rgb(251, 153, 2, 0.5);
+    padding: 1rem;
+}
+
+footer {
+    padding: 2rem;
+}
+
+.footer-copyright {
+    margin-left: 1rem;
+}
+
+.card {
+    width: 18rem;
+    padding: 1rem;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 2rem;
+}
+
+.heart {
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border-radius: 50%;
+    background-color: rgb(220, 220, 220)
+}
+
+.heart:hover {
+    height: 38px;
+    width: 38px;
+    font-size: 15px;
+}
+
+.btn-buy {
+    background-color: rgb(251, 153, 2);
+}
+
+.btn-add {
+    border-color: rgb(251, 153, 2);
+}
+
+.btn:hover {
+    color: rgb(251, 153, 2);
+    background-color: #fff;
+    border-color: rgb(251, 153, 2);
+    box-shadow: none
+}

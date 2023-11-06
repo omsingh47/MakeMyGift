@@ -1,12 +1,16 @@
-const { default: mongoose } = require("mongoose");
 
+const { default: mongoose } = require("mongoose");
 var cartSchema = new mongoose.Schema({
     title:{
         type:String,
         required: true,
         trim: true
     },
-    shop:{
+    product_id:{
+        type:String,
+        lowercase:true
+    },
+    shop_tag:{
         type:String,
         required:true
     },
@@ -14,15 +18,18 @@ var cartSchema = new mongoose.Schema({
         type:Number,
         required: true,
     },
-    quantity:{
-        type: Number,
-        default: 1
-    },
     images:{
         type: Array,
     },
+    cust_text:{
+        type:String,
+        default:""
+    },
+    cust_images:{
+        type: String
+    },
     user:{
-        type: String,
+        type: String, 
         required: true
     }
 }, {timestamps: true});

@@ -1,13 +1,16 @@
 const Product = require("../models/productModel");
 const asyncHandler = require("express-async-handler")
-const slugify = require('slugify')
+
 const createProduct = asyncHandler(async(req, res)=>{
     try{
-        if(req.body.title){
-            req.body.slug = slugify(req.body.title);
+        const find = await Product.findOne({product_id : req.body.product_id})
+        if(find){
+            return res.status(401).json({message: "This product already exists"});
         }
-        const newProduct = await Product.create(req.body);
-        res.json(newProduct);
+        else{
+            const newProduct = await Product.create(req.body);
+            res.json(newProduct);
+        }
     }
     catch(error){
         throw new Error(error);
@@ -15,9 +18,10 @@ const createProduct = asyncHandler(async(req, res)=>{
     
 });
 const getaProduct = asyncHandler(async(req, res)=>{
-    const {id} = req.params;
+    const {id} = req.params; ///:id is defined in router...
+    console.log(req.params);
     try{
-        const findProduct = await Product.findById(id);
+        const findProduct = await Product.findOne({product_id : id});
         if (!findProduct) {
             res.status(404).json({ message: "Product not found" });
           }
@@ -26,7 +30,6 @@ const getaProduct = asyncHandler(async(req, res)=>{
     catch(error){
         throw new Error(error);
     }
-    
 });
 const getAllProduct = asyncHandler(async(req, res)=>{
     try{
@@ -41,11 +44,8 @@ const getAllProduct = asyncHandler(async(req, res)=>{
 const updateProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
     try {
-        if (req.body.title) {
-            req.body.slug = slugify(req.body.title);
-        }
         const updateProduct = await Product.findOneAndUpdate(
-            { _id: id }, // Use _id instead of id if it's the default MongoDB ObjectId field name
+            { product_id: id }, // Use _id instead of id if it's the default MongoDB ObjectId field name
             { $set: req.body }, // Use $set to update the fields in req.body
             { new: true }
         );
@@ -57,7 +57,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 const deleteProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
     try {
-        const updateProduct = await Product.findOneAndDelete(id);
+        const updateProduct = await Product.findOneAndDelete({product_id:id});
         res.json(updateProduct);
     } catch (error) {
       throw new Error(error);

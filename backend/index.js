@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 // const authRouter = require("./route/productRoute")
 const productRouter = require("./route/productRoute")
 const cartRouter = require("./route/cartRoute")
+const authRouter = require("./route/authRoute")
 const cookieParser = require("cookie-parser");
 const dbConnect = require("../backend/config/dbConnect")
 dbConnect();
@@ -16,6 +17,7 @@ var cors = require('cors')
 app.use(cors({
     origin: `http://localhost:5000`,
   }));
+  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser());
@@ -23,6 +25,8 @@ app.use(morgan("dev")); //Tells us about the request we make in terminal..
 // app.use("/api/user", authRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
+app.use('/api/auth', authRouter)
+
 // app.get('/api/product', function (req, res, next) {
 //     res.json({msg: 'This is CORS-enabled for all origins!'})
 //   })

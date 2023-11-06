@@ -1,73 +1,89 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import Modal from './Modal';
 
 const Productitem = (props) => {
-    const { notes } = props;
+    const { products } = props;
     const navigate = useNavigate();
     const [stop, setStop] = useState(false);
+    const [customText, setCustomText] = useState("");
+    const [image, setImage] = useState([])
+    const [isModalOpen, setisModalOpen] = useState(false)
+    // const [quantity, setQuantity] = useState(1); // State for quantity
+
+    const openModal = () => {
+        localStorage.setItem("product_obj", JSON.stringify(products))
+        setisModalOpen(true)
+    }
 
     const handleCardClick = async () => {
         if (!stop) {
-            localStorage.setItem("productId", notes._id);
+            localStorage.setItem("productId", products.product_id);
             navigate("/productpage")
         }
     };
 
-    const addCart = async () => {
-        setStop(true); // Set the flag to stop propagation
-        try {
-            const qty = document.getElementById('quantitySelect').value;
-            console.log(qty);
-            const host = "http://localhost:5000";
-            //API CALL
-            const bodyObj = {
-                "title": notes.title,
-                "shop": notes.shop_tag,
-                "price": notes.price,
-                "user": 560,
-                "quantity": qty || 1, // Use selected quantity or default to 1
-            }
+    // const incrementQuantity = () => {
+    //     setQuantity(quantity + 1);
+    // };
 
-
-            const response = await fetch(`${host}/api/cart`, {
-                method: 'POST',
-                body: JSON.stringify(bodyObj),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const json = await response.json();
-            console.log(json);
-        }
-        catch (error) {
-            console.error("Error fetching product details:", error);
-        }
-    }
+    // const decrementQuantity = () => {
+    //     if (quantity > 1) {
+    //         setQuantity(quantity - 1);
+    //     }
+    // }  
 
     return (
-        <div className='my-4 mx-5' style={{ cursor: 'pointer' }}>
-            <div className="card" onClick={handleCardClick}>
-                <img src="https://i.ibb.co/7tYPjkZ/pexels-veeterzy-303383.jpg" className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <h5 className="card-title">{notes.title}</h5>
-                    <p className="card-text">{notes.description}</p>
-                    <p className="card-text"><small className="text-muted">By {notes.shop_tag}</small></p>
+        <>
+            {/* Modal */}
+            <Modal stop={stop} setStop={setStop} products={products} isModalOpen={isModalOpen} setisModalOpen={setisModalOpen} image={image} setImage={setImage} customText={customText} setCustomText={setCustomText} />
+
+            <div className="card" >
+                <div className="inner-card" onClick={handleCardClick} > <img src="https://i.imgur.com/4qXhMAM.jpg" alt='' className="img-fluid rounded" />
+                    <div className="d-flex justify-content-between align-items-center mt-3">
+                        <h4>{products.title} </h4>
+                    </div>
+                    By<small>{products.shop}</small>
+                    <p><b>Price: &#x20B9;{products.price}</b></p>
                 </div>
+                {/* <div className="px-2">
+                    <div>
+                        Qty:
+                        <button className='mx-2' style={{
+                            backgroundColor: 'rgb(251, 153, 2)',
+                            border: '1px solid black',
+                            color: "white",
+                            padding: '4px 13px',
+                            borderRadius: '20px',
+                            cursor: 'pointer',
+                        }} onClick={decrementQuantity}>-</button>
+                        <input style={{
+                            width: '40px',
+                            textAlign: 'center',
+                            padding: "3px 0", border: "1px solid rgb(251, 153, 2)"
+                        }}
+                            type="number"
+                            value={quantity}
+                            onChange={(e) => setQuantity(e.target.value)}
+                            min="1"
+                            max="10"
+                        />
+                        <button className='mx-2' style={{
+                            backgroundColor: 'rgb(251, 153, 2)',
+                            border: '1px solid black',
+                            color: "white",
+                            padding: '4px 12px',
+                            borderRadius: '20px',
+                            cursor: 'pointer',
+                        }} onClick={incrementQuantity}>+</button>
+                    </div>
+
+                </div> */}
+                
+                <button onClick={openModal} className="btn btn-dark btn-add my-2" style={{ "width": "253px" }}>Add to cart</button>
+                {/* </div> */}
             </div>
-            <div style={{ marginTop: "10px" }}>
-                <label htmlFor="quantitySelect">Quantity:</label>
-                <select id="quantitySelect" style={{ display: "inline", marginLeft: "3px", width: "10%" }} className="form-control">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <div style={{ textAlign: "center", display: "initial", marginTop: "5px", marginLeft: "100px"}}>
-                <button type="button" style={{ textAlign: "center" }} className="btn btn-warning" onClick={addCart}>Add to Cart</button>
-            </div>
-        </div>
-        </div >
+        </>
     );
 }
 
